@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import (
 QWidget, QPushButton, QLabel, QVBoxLayout, QLineEdit, QCheckBox, QGroupBox, QHBoxLayout
 )
 from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont,QPixmap
 import os
 import requests
 from dotenv import load_dotenv
@@ -17,7 +17,7 @@ class WeatherApp(QWidget):
         super().__init__()
         self.setWindowTitle("MQTT Weather Controller")
         self.setGeometry(200, 200, 600, 600)
-        self.apiKey = os.getenv("API_KEY_OPEN_WEATHER")
+        self.apiKey = os.getenv("WEATHER_API_KEY") if os.getenv("WEATHER_API_KEY") else "7dcd8881476995203f76452aa6f05dc7"
         self.initUI()
 
     def initUI(self):
@@ -71,8 +71,12 @@ class WeatherApp(QWidget):
 
         # Main Layout
         main_layout = QVBoxLayout()
-        title = QLabel("MQTT Message Viewer")
+        main_layout.setContentsMargins(20, 20, 20, 20)
+        title = QLabel("Weather APP")
         title.setFont(QFont("Arial", 16))
+        title.setAlignment(Qt.AlignCenter)
+        title.setStyleSheet("color: #2c3e50; font-weight: bold;font-size: 24px;")
+        title.setFont(QFont("Arial", 24, QFont.Bold))
 
         main_layout.addWidget(title)
         main_layout.addWidget(weather_box)
@@ -80,11 +84,15 @@ class WeatherApp(QWidget):
         main_layout.addWidget(control_box)
 
         self.setLayout(main_layout)
+        # Get absolute path
+        img_path = os.path.abspath("weather_background.jpg").replace("\\", "/")
+        print("Image path:", img_path)  # Debugging aid
 
         # Styling
         self.setStyleSheet("""
         QWidget {
-            background-color: #ecf0d4;
+        background-color: #ecf0d4;
+        
         }
         QLabel {
             color: #3498db;

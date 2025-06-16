@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=MQTT Weather Controller
+Comment=Control MQTT devices and view weather
+Exec=/home/mahniss-linux/Documents/school-pyqt5/weatherApp/dist/main
+Icon=/home/mahniss-linux/Documents/school-pyqt5/weatherApp/weather_pyqt.png
+Terminal=false
+Type=Application
+Categories=Utility;
